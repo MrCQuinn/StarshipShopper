@@ -171,6 +171,7 @@ private extension StarshipListViewController {
         
         // if data is not fetched wait for completion
         if !viewModel.isFetched() {
+            viewModel.fetch(all: true)
             sortOnFetched = currentSort
             return
         }

@@ -42,8 +42,12 @@ final class StarshipViewModel {
     func isFetched() -> Bool {
         return starships.count >= total
     }
-
+    
     func fetchStarships() {
+        fetch(all: false)
+    }
+    
+    func fetch(all: Bool) {
       guard !isFetchInProgress else {
         return
       }
@@ -69,6 +73,10 @@ final class StarshipViewModel {
               self.delegate?.onFetchCompleted(with: indexPathsToReload)
             } else {
               self.delegate?.onFetchCompleted(with: .none)
+            }
+            
+            if all && !self.isFetched() {
+                self.fetch(all: true)
             }
           }
         }
