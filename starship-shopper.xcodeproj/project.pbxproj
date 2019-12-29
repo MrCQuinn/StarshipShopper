@@ -1,0 +1,679 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC9B886623B8129200BA411A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B886523B8129200BA411A /* AppDelegate.swift */; };
+		EC9B886D23B8129200BA411A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9B886B23B8129200BA411A /* Main.storyboard */; };
+		EC9B886F23B8129400BA411A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC9B886E23B8129400BA411A /* Assets.xcassets */; };
+		EC9B887223B8129400BA411A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9B887023B8129400BA411A /* LaunchScreen.storyboard */; };
+		EC9B889D23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
+		EC9B889E23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
+		EC9B889F23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
+		EC9B88A123B81D1500BA411A /* StarshipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A023B81D1500BA411A /* StarshipListViewController.swift */; };
+		EC9B88A223B81D1500BA411A /* StarshipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A023B81D1500BA411A /* StarshipListViewController.swift */; };
+		EC9B88A323B81D1500BA411A /* StarshipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A023B81D1500BA411A /* StarshipListViewController.swift */; };
+		EC9B88A623B821BA00BA411A /* StarshipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A523B821BA00BA411A /* StarshipViewModel.swift */; };
+		EC9B88A723B821BA00BA411A /* StarshipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A523B821BA00BA411A /* StarshipViewModel.swift */; };
+		EC9B88A823B821BA00BA411A /* StarshipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88A523B821BA00BA411A /* StarshipViewModel.swift */; };
+		EC9B88AC23B8241000BA411A /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AB23B8241000BA411A /* Starship.swift */; };
+		EC9B88AD23B8241000BA411A /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AB23B8241000BA411A /* Starship.swift */; };
+		EC9B88AE23B8241000BA411A /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AB23B8241000BA411A /* Starship.swift */; };
+		EC9B88B023B82A1900BA411A /* StarWarsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AF23B82A1900BA411A /* StarWarsClient.swift */; };
+		EC9B88B123B82A1900BA411A /* StarWarsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AF23B82A1900BA411A /* StarWarsClient.swift */; };
+		EC9B88B223B82A1900BA411A /* StarWarsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88AF23B82A1900BA411A /* StarWarsClient.swift */; };
+		EC9B88B923B830A100BA411A /* StarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88B823B830A100BA411A /* StarshipTableViewCell.swift */; };
+		EC9B88BA23B830A100BA411A /* StarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88B823B830A100BA411A /* StarshipTableViewCell.swift */; };
+		EC9B88BB23B830A100BA411A /* StarshipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88B823B830A100BA411A /* StarshipTableViewCell.swift */; };
+		EC9B88BD23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88BC23B833ED00BA411A /* PagedStarshipResponse.swift */; };
+		EC9B88BE23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88BC23B833ED00BA411A /* PagedStarshipResponse.swift */; };
+		EC9B88BF23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88BC23B833ED00BA411A /* PagedStarshipResponse.swift */; };
+		EC9B88C123B8365400BA411A /* DataResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88C023B8365400BA411A /* DataResponseError.swift */; };
+		EC9B88C223B8365400BA411A /* DataResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88C023B8365400BA411A /* DataResponseError.swift */; };
+		EC9B88C323B8365400BA411A /* DataResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B88C023B8365400BA411A /* DataResponseError.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC9B887923B8129400BA411A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC9B885A23B8129200BA411A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC9B886123B8129200BA411A;
+			remoteInfo = "starship-shopper";
+		};
+		EC9B888423B8129400BA411A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC9B885A23B8129200BA411A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC9B886123B8129200BA411A;
+			remoteInfo = "starship-shopper";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC9B886223B8129200BA411A /* starship-shopper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "starship-shopper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9B886523B8129200BA411A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC9B886C23B8129200BA411A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC9B886E23B8129400BA411A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC9B887123B8129400BA411A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC9B887323B8129400BA411A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC9B887823B8129400BA411A /* starship-shopperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "starship-shopperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9B888323B8129400BA411A /* starship-shopperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "starship-shopperUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9B889C23B81AEC00BA411A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		EC9B88A023B81D1500BA411A /* StarshipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipListViewController.swift; sourceTree = "<group>"; };
+		EC9B88A523B821BA00BA411A /* StarshipViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipViewModel.swift; sourceTree = "<group>"; };
+		EC9B88AB23B8241000BA411A /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
+		EC9B88AF23B82A1900BA411A /* StarWarsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsClient.swift; sourceTree = "<group>"; };
+		EC9B88B823B830A100BA411A /* StarshipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipTableViewCell.swift; sourceTree = "<group>"; };
+		EC9B88BC23B833ED00BA411A /* PagedStarshipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedStarshipResponse.swift; sourceTree = "<group>"; };
+		EC9B88C023B8365400BA411A /* DataResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResponseError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC9B885F23B8129200BA411A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B887523B8129400BA411A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B888023B8129400BA411A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC9B885923B8129200BA411A = {
+			isa = PBXGroup;
+			children = (
+				EC9B886423B8129200BA411A /* starship-shopper */,
+				EC9B886323B8129200BA411A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC9B886323B8129200BA411A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B886223B8129200BA411A /* starship-shopper.app */,
+				EC9B887823B8129400BA411A /* starship-shopperTests.xctest */,
+				EC9B888323B8129400BA411A /* starship-shopperUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC9B886423B8129200BA411A /* starship-shopper */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B887323B8129400BA411A /* Info.plist */,
+				EC9B88A923B823EA00BA411A /* Networking */,
+				EC9B88A423B8218F00BA411A /* ViewModels */,
+				EC9B889B23B81A8400BA411A /* Controllers */,
+				EC9B889A23B81A5B00BA411A /* Resources */,
+				EC9B889923B8141100BA411A /* Views */,
+				EC9B886523B8129200BA411A /* AppDelegate.swift */,
+			);
+			path = "starship-shopper";
+			sourceTree = "<group>";
+		};
+		EC9B889923B8141100BA411A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B887023B8129400BA411A /* LaunchScreen.storyboard */,
+				EC9B886B23B8129200BA411A /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC9B889A23B81A5B00BA411A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B886E23B8129400BA411A /* Assets.xcassets */,
+				EC9B88B823B830A100BA411A /* StarshipTableViewCell.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EC9B889B23B81A8400BA411A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B889C23B81AEC00BA411A /* BaseViewController.swift */,
+				EC9B88A023B81D1500BA411A /* StarshipListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EC9B88A423B8218F00BA411A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B88A523B821BA00BA411A /* StarshipViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC9B88A923B823EA00BA411A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B88C023B8365400BA411A /* DataResponseError.swift */,
+				EC9B88AA23B823F300BA411A /* Models */,
+				EC9B88AF23B82A1900BA411A /* StarWarsClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		EC9B88AA23B823F300BA411A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B88BC23B833ED00BA411A /* PagedStarshipResponse.swift */,
+				EC9B88AB23B8241000BA411A /* Starship.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC9B886123B8129200BA411A /* starship-shopper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9B888C23B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopper" */;
+			buildPhases = (
+				EC9B885E23B8129200BA411A /* Sources */,
+				EC9B885F23B8129200BA411A /* Frameworks */,
+				EC9B886023B8129200BA411A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "starship-shopper";
+			productName = "starship-shopper";
+			productReference = EC9B886223B8129200BA411A /* starship-shopper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC9B887723B8129400BA411A /* starship-shopperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9B888F23B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopperTests" */;
+			buildPhases = (
+				EC9B887423B8129400BA411A /* Sources */,
+				EC9B887523B8129400BA411A /* Frameworks */,
+				EC9B887623B8129400BA411A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC9B887A23B8129400BA411A /* PBXTargetDependency */,
+			);
+			name = "starship-shopperTests";
+			productName = "starship-shopperTests";
+			productReference = EC9B887823B8129400BA411A /* starship-shopperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC9B888223B8129400BA411A /* starship-shopperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9B889223B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopperUITests" */;
+			buildPhases = (
+				EC9B887F23B8129400BA411A /* Sources */,
+				EC9B888023B8129400BA411A /* Frameworks */,
+				EC9B888123B8129400BA411A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC9B888523B8129400BA411A /* PBXTargetDependency */,
+			);
+			name = "starship-shopperUITests";
+			productName = "starship-shopperUITests";
+			productReference = EC9B888323B8129400BA411A /* starship-shopperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC9B885A23B8129200BA411A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Charlie Quinn's Personal Projects";
+				TargetAttributes = {
+					EC9B886123B8129200BA411A = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					EC9B887723B8129400BA411A = {
+						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
+						TestTargetID = EC9B886123B8129200BA411A;
+					};
+					EC9B888223B8129400BA411A = {
+						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
+						TestTargetID = EC9B886123B8129200BA411A;
+					};
+				};
+			};
+			buildConfigurationList = EC9B885D23B8129200BA411A /* Build configuration list for PBXProject "starship-shopper" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC9B885923B8129200BA411A;
+			productRefGroup = EC9B886323B8129200BA411A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC9B886123B8129200BA411A /* starship-shopper */,
+				EC9B887723B8129400BA411A /* starship-shopperTests */,
+				EC9B888223B8129400BA411A /* starship-shopperUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC9B886023B8129200BA411A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9B887223B8129400BA411A /* LaunchScreen.storyboard in Resources */,
+				EC9B886F23B8129400BA411A /* Assets.xcassets in Resources */,
+				EC9B886D23B8129200BA411A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B887623B8129400BA411A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B888123B8129400BA411A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC9B885E23B8129200BA411A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9B88C123B8365400BA411A /* DataResponseError.swift in Sources */,
+				EC9B88A623B821BA00BA411A /* StarshipViewModel.swift in Sources */,
+				EC9B88AC23B8241000BA411A /* Starship.swift in Sources */,
+				EC9B88B923B830A100BA411A /* StarshipTableViewCell.swift in Sources */,
+				EC9B886623B8129200BA411A /* AppDelegate.swift in Sources */,
+				EC9B88BD23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */,
+				EC9B88A123B81D1500BA411A /* StarshipListViewController.swift in Sources */,
+				EC9B889D23B81AEC00BA411A /* BaseViewController.swift in Sources */,
+				EC9B88B023B82A1900BA411A /* StarWarsClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B887423B8129400BA411A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9B88A223B81D1500BA411A /* StarshipListViewController.swift in Sources */,
+				EC9B88A723B821BA00BA411A /* StarshipViewModel.swift in Sources */,
+				EC9B88BE23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */,
+				EC9B889E23B81AEC00BA411A /* BaseViewController.swift in Sources */,
+				EC9B88AD23B8241000BA411A /* Starship.swift in Sources */,
+				EC9B88C223B8365400BA411A /* DataResponseError.swift in Sources */,
+				EC9B88B123B82A1900BA411A /* StarWarsClient.swift in Sources */,
+				EC9B88BA23B830A100BA411A /* StarshipTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9B887F23B8129400BA411A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9B88A323B81D1500BA411A /* StarshipListViewController.swift in Sources */,
+				EC9B88A823B821BA00BA411A /* StarshipViewModel.swift in Sources */,
+				EC9B88BF23B833ED00BA411A /* PagedStarshipResponse.swift in Sources */,
+				EC9B889F23B81AEC00BA411A /* BaseViewController.swift in Sources */,
+				EC9B88AE23B8241000BA411A /* Starship.swift in Sources */,
+				EC9B88C323B8365400BA411A /* DataResponseError.swift in Sources */,
+				EC9B88B223B82A1900BA411A /* StarWarsClient.swift in Sources */,
+				EC9B88BB23B830A100BA411A /* StarshipTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC9B887A23B8129400BA411A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC9B886123B8129200BA411A /* starship-shopper */;
+			targetProxy = EC9B887923B8129400BA411A /* PBXContainerItemProxy */;
+		};
+		EC9B888523B8129400BA411A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC9B886123B8129200BA411A /* starship-shopper */;
+			targetProxy = EC9B888423B8129400BA411A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC9B886B23B8129200BA411A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC9B886C23B8129200BA411A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EC9B887023B8129400BA411A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC9B887123B8129400BA411A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC9B888A23B8129400BA411A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EC9B888B23B8129400BA411A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC9B888D23B8129400BA411A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC9B888E23B8129400BA411A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EC9B889023B8129400BA411A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopperTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/starship-shopper.app/starship-shopper";
+			};
+			name = Debug;
+		};
+		EC9B889123B8129400BA411A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopperTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopperTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/starship-shopper.app/starship-shopper";
+			};
+			name = Release;
+		};
+		EC9B889323B8129400BA411A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopperUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopperUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "starship-shopper";
+			};
+			name = Debug;
+		};
+		EC9B889423B8129400BA411A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VG9PRZTZR;
+				INFOPLIST_FILE = "starship-shopperUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "charliequinn.starship-shopperUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "starship-shopper";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC9B885D23B8129200BA411A /* Build configuration list for PBXProject "starship-shopper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9B888A23B8129400BA411A /* Debug */,
+				EC9B888B23B8129400BA411A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9B888C23B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9B888D23B8129400BA411A /* Debug */,
+				EC9B888E23B8129400BA411A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9B888F23B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9B889023B8129400BA411A /* Debug */,
+				EC9B889123B8129400BA411A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9B889223B8129400BA411A /* Build configuration list for PBXNativeTarget "starship-shopperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9B889323B8129400BA411A /* Debug */,
+				EC9B889423B8129400BA411A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC9B885A23B8129200BA411A /* Project object */;
+}
