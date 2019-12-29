@@ -12,7 +12,7 @@ struct Starship: Decodable {
     let name: String
 //    let model: String
 //    let manufacturer: String
-//    let cost: Int
+    let cost: Int?
 //    let length: Double
 //    let maxSpeed: Int
 //    let crewSize: Int
@@ -36,7 +36,7 @@ struct Starship: Decodable {
          self.name = name
 //         self.model = model
 //         self.manufacturer = manufacturer
-//         self.cost = cost
+         self.cost = cost
 //         self.length = length
 //         self.maxSpeed = maxSpeed
 //         self.crewSize = crewSize
@@ -45,8 +45,9 @@ struct Starship: Decodable {
     }
     
     // for testing
-    init(name: String)  {
+    init(name: String, cost: Int?)  {
         self.name = name
+        self.cost = cost
     }
     
     init(from decoder: Decoder) throws {
@@ -54,7 +55,9 @@ struct Starship: Decodable {
         let name                    = try container.decode(String.self, forKey: .name)
 //        let model                   = try container.decode(String.self, forKey: .model)
 //        let manufacturer            = try container.decode(String.self, forKey: .manufacturer)
-//        let cost                    = try container.decode(Int.self, forKey: .cost)
+        let costString                    = try container.decode(String.self, forKey: .cost)
+        
+        let cost = Int(costString)
 //        let length                  = try container.decode(Double.self, forKey: .length)
 //        let maxSpeed                = try container.decode(Int.self, forKey: .maxSpeed)
 //        let crewSize                = try container.decode(Int.self, forKey: .crewSize)
@@ -62,7 +65,7 @@ struct Starship: Decodable {
 //        let cargoCapacity           = try container.decode(Int.self, forKey: .cargoCapacity)
 //        self.init(name: name, model: model, manufacturer: manufacturer, cost: cost, length: length, maxSpeed: maxSpeed, crewSize: crewSize,
 //        passengerCapacity: passengerCapacity, cargoCapacity: cargoCapacity)
-        self.init(name: name)
+        self.init(name: name, cost: cost)
     }
 }
 

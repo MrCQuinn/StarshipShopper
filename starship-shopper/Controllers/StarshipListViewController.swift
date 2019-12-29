@@ -10,13 +10,18 @@ import UIKit
 
 class StarshipListViewController: UIViewController {
     private enum CellIdentifiers {
-      static let list = "StarshipList"
+        static let starship = "StarshipCell"
+    }
+    
+    private enum SegueIdentifiers {
+        static let starshipDetail = "StarshipDetailSegue"
     }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var viewModel: StarshipViewModel!
+    private var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +32,19 @@ class StarshipListViewController: UIViewController {
         tableView.isHidden = true
         tableView.dataSource = self
         tableView.prefetchDataSource = self
+        tableView.delegate = self
         
         viewModel = StarshipViewModel(endpoint: "starships", delegate: self)
         viewModel.fetchStarships()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifiers.starshipDetail {
+            let secondVc = segue.destination as! StarshipDetailsViewController
+            let indexPath = sender as! IndexPath
+            
+            secondVc.starship = viewModel.starship(at: indexPath.row)
+        }
     }
 }
 
@@ -39,7 +54,7 @@ extension StarshipListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! StarshipTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.starship, for: indexPath) as! StarshipTableViewCell
         
         if isLoadingCell(for: indexPath) {
             cell.configure(with: .none)
@@ -55,6 +70,12 @@ extension StarshipListViewController: UITableViewDataSourcePrefetching {
         if indexPaths.contains(where: isLoadingCell) {
             viewModel.fetchStarships()
         }
+    }
+}
+
+extension StarshipListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: SegueIdentifiers.starshipDetail, sender: indexPath)
     }
 }
 
