@@ -17,17 +17,15 @@ class StarshipListViewController: UIViewController {
         static let starshipDetail = "StarshipDetailSegue"
     }
     
-    private enum Sortables {
-        static let cost = "Cost"
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
-    
-    
     private var viewModel: StarshipViewModel!
     private var selectedIndexPath: IndexPath?
+    
+    private var currentSort: String?
+    private var sortOnFetched: String?
+    private var desc: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +93,15 @@ extension StarshipListViewController: StarshipViewModelDelegate {
         }
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        
+        if viewModel.isFetched() {
+            guard let sortOn = self.sortOnFetched else {
+                return
+            }
+            print("starships fetched, sorting on "+sortOn)
+            onSort(sortOn: sortOn)
+            sortOnFetched = nil
+        }
     }
     
     func onFetchFailed(with reason: String) {
@@ -137,9 +144,8 @@ private extension StarshipListViewController {
     @IBAction func sort(_ sender: Any) {
         let alert = UIAlertController(title: "Sort", message: "Choose an attribute to sort on", preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: Sortables.cost, style: .default , handler:{ (UIAlertAction)in
-            self.onSort(sortOn: Sortables.cost)
-            print("User clicked cost")
+        alert.addAction(UIAlertAction(title: Starship.Sortables.cost, style: .default , handler:{ (UIAlertAction)in
+            self.onSort(sortOn: Starship.Sortables.cost)
         }))
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
@@ -152,5 +158,24 @@ private extension StarshipListViewController {
     }
     
     func onSort(sortOn: String) {
+        // if the rows are already sorted by this attribute reverse order
+        if let cur = currentSort {
+            if (cur == sortOn) {
+                desc = !desc
+            }else {
+                desc = true
+            }
+        }
+        // set currently sorted attribute
+        currentSort = sortOn
+        
+        // if data is not fetched wait for completion
+        if !viewModel.isFetched() {
+            sortOnFetched = currentSort
+            return
+        }
+        
+        viewModel.sortOn(sortOn: sortOn, desc: desc)
+        tableView.reloadData()
     }
 }

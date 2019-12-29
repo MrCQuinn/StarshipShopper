@@ -32,13 +32,17 @@ final class StarshipViewModel {
     }
     
     var currentCount: Int {
-       return starships.count
-     }
-     
-     func starship(at index: Int) -> Starship {
-       return starships[index]
-     }
+        return starships.count
+    }
     
+    func starship(at index: Int) -> Starship {
+        return starships[index]
+    }
+    
+    func isFetched() -> Bool {
+        return starships.count >= total
+    }
+
     func fetchStarships() {
       guard !isFetchInProgress else {
         return
@@ -69,6 +73,41 @@ final class StarshipViewModel {
           }
         }
       }
+    }
+    
+    func sortOn(sortOn: String, desc: Bool) {
+        switch sortOn {
+        case Starship.Sortables.cost:
+            if desc {
+                self.starships.sort(by: costSortDesc)
+                return
+            }
+            self.starships.sort(by: costSortAsc)
+        default:
+            print("Sortable "+" is not implemented")
+        }
+    }
+    
+    func costSortDesc(this:Starship, that:Starship) -> Bool {
+        guard let thisCost = this.cost else {
+            return false
+        }
+        guard let thatCost = that.cost else {
+            return true
+        }
+        
+        return thisCost > thatCost
+    }
+    
+    func costSortAsc(this:Starship, that:Starship) -> Bool {
+        guard let thisCost = this.cost else {
+           return false
+        }
+        guard let thatCost = that.cost else {
+           return true
+        }
+        
+        return thisCost < thatCost
     }
     
     private func calculateIndexPathsToReload(from newStarships: [Starship]) -> [IndexPath] {

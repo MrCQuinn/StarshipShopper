@@ -75,6 +75,10 @@ struct Starship: Decodable {
         
         return "Cost Unknown"
     }
+    
+    enum Sortables {
+           static let cost = "Cost"
+    }
 }
 
 /*
