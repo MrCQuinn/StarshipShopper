@@ -20,6 +20,8 @@ class StarshipListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
+    
+    
     private var viewModel: StarshipViewModel!
     private var selectedIndexPath: IndexPath?
     
@@ -125,4 +127,21 @@ private extension StarshipListViewController {
       }
       present(alertController, animated: true)
     }
+}
+
+private extension StarshipListViewController {
+    @IBAction func sort(_ sender: Any) {
+        let alert = UIAlertController(title: "Sort", message: "Choose an attribute to sort on", preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Cost", style: .default , handler:{ (UIAlertAction)in
+            print("User clicked cost")
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            print("User clicked cancel button")
+        }))
+
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })    }
 }

@@ -123,7 +123,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="op3-lb-Fpy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NQb-KX-ADC"/>
+                    <navigationItem key="navigationItem" id="NQb-KX-ADC">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="SbF-Kh-qSk">
+                            <connections>
+                                <action selector="sort:" destination="ZxZ-YR-vvm" id="hbG-qJ-da9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="indicatorView" destination="VpT-yv-Rcy" id="fxr-tb-VRM"/>
                         <outlet property="tableView" destination="cKy-TU-Cxv" id="Vbd-Uu-j5z"/>
