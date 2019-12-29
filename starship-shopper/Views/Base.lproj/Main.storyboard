@@ -78,31 +78,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="16px-Republic_credit_symbol.svg" translatesAutoresizingMaskIntoConstraints="NO" id="TKz-wn-QLr">
-                                                    <rect key="frame" x="320" y="32" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="IJa-33-O1q"/>
-                                                        <constraint firstAttribute="width" constant="24" id="LIa-Ej-MQX"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mtd-qk-Hbc" firstAttribute="trailing" secondItem="A88-gM-wTq" secondAttribute="trailingMargin" id="5XM-DW-kfs"/>
-                                                <constraint firstItem="TKz-wn-QLr" firstAttribute="centerY" secondItem="A88-gM-wTq" secondAttribute="centerY" id="CdA-me-QnN"/>
-                                                <constraint firstItem="TKz-wn-QLr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XTV-8T-GQt" secondAttribute="trailing" constant="8" id="Ik9-w7-1Lo"/>
+                                                <constraint firstItem="mtd-qk-Hbc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XTV-8T-GQt" secondAttribute="trailing" constant="8" id="Gvc-SJ-WSY"/>
                                                 <constraint firstItem="mtd-qk-Hbc" firstAttribute="centerY" secondItem="A88-gM-wTq" secondAttribute="centerY" id="Qb1-OH-9v0"/>
                                                 <constraint firstItem="MuP-9R-B0J" firstAttribute="top" secondItem="A88-gM-wTq" secondAttribute="topMargin" constant="1" id="SGn-so-BLf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="MuP-9R-B0J" secondAttribute="bottom" constant="1" id="SNh-GO-oeQ"/>
                                                 <constraint firstItem="XTV-8T-GQt" firstAttribute="top" secondItem="A88-gM-wTq" secondAttribute="topMargin" id="fcD-Sl-7qu"/>
                                                 <constraint firstItem="MuP-9R-B0J" firstAttribute="leading" secondItem="A88-gM-wTq" secondAttribute="leadingMargin" id="lX8-Hk-OnA"/>
                                                 <constraint firstItem="XTV-8T-GQt" firstAttribute="leading" secondItem="A88-gM-wTq" secondAttribute="leadingMargin" id="xHS-Iw-Fhq"/>
-                                                <constraint firstItem="mtd-qk-Hbc" firstAttribute="leading" secondItem="TKz-wn-QLr" secondAttribute="trailing" constant="8" id="z00-QQ-p3J"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="XTV-8T-GQt" secondAttribute="bottom" constant="0.5" id="zKW-oY-OuE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="costLabel" destination="mtd-qk-Hbc" id="pOj-s9-tc2"/>
-                                            <outlet property="creditsIcon" destination="TKz-wn-QLr" id="Pbh-fD-BpU"/>
                                             <outlet property="indicatorView" destination="MuP-9R-B0J" id="EnI-SA-YZW"/>
                                             <outlet property="nameLabel" destination="XTV-8T-GQt" id="Lhd-9v-T49"/>
                                         </connections>
@@ -207,7 +197,4 @@
             <point key="canvasLocation" x="1521.7391304347827" y="133.92857142857142"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="16px-Republic_credit_symbol.svg" width="16" height="27"/>
-    </resources>
 </document>

@@ -17,6 +17,10 @@ class StarshipListViewController: UIViewController {
         static let starshipDetail = "StarshipDetailSegue"
     }
     
+    private enum Sortables {
+        static let cost = "Cost"
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
@@ -36,7 +40,7 @@ class StarshipListViewController: UIViewController {
         tableView.prefetchDataSource = self
         tableView.delegate = self
         
-        viewModel = StarshipViewModel(endpoint: "starships", delegate: self)
+        viewModel = StarshipViewModel(delegate: self)
         viewModel.fetchStarships()
     }
     
@@ -133,7 +137,8 @@ private extension StarshipListViewController {
     @IBAction func sort(_ sender: Any) {
         let alert = UIAlertController(title: "Sort", message: "Choose an attribute to sort on", preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Cost", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: Sortables.cost, style: .default , handler:{ (UIAlertAction)in
+            self.onSort(sortOn: Sortables.cost)
             print("User clicked cost")
         }))
 
@@ -143,5 +148,9 @@ private extension StarshipListViewController {
 
         self.present(alert, animated: true, completion: {
             print("completion block")
-        })    }
+        })
+    }
+    
+    func onSort(sortOn: String) {
+    }
 }

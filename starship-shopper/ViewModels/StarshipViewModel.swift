@@ -22,10 +22,8 @@ final class StarshipViewModel {
     private var isFetchInProgress = false
     
     let client = StarWarsClient()
-    let endpoint: String
     
-    init(endpoint: String, delegate: StarshipViewModelDelegate) {
-        self.endpoint = endpoint
+    init(delegate: StarshipViewModelDelegate) {
         self.delegate = delegate
     }
     
@@ -48,7 +46,7 @@ final class StarshipViewModel {
       
       isFetchInProgress = true
       
-        client.fetchStarships(endpoint: self.endpoint, page: currentPage) { result in
+        client.fetchStarships(page: currentPage) { result in
         switch result {
         case .failure(let error):
           DispatchQueue.main.async {

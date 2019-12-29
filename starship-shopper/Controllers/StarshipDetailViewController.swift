@@ -20,11 +20,7 @@ class StarshipDetailsViewController: UIViewController {
         
         if let starship = self.starship {
             nameLabel.text? = starship.name
-            if let cost = starship.cost {
-                priceLabel.text? = "₹"+String(cost)
-            }else {
-                priceLabel.text? = "Unknown"
-            }
+            priceLabel.text? = starship.formatCostString()
         }
     }
 }

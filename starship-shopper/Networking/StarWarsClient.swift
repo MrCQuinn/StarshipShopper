@@ -13,17 +13,25 @@ final class StarWarsClient {
         return URL(string: "https://swapi.co/api/")!
     }()
     
+    private enum Endpoints {
+        static let starships = "starships"
+    }
+    
     let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func fetchStarships(endpoint: String, page: Int, completion: @escaping (Result<PagedStarshipResponse, DataResponseError>) -> Void) {
+    func starWarsRequest(endpoint: String, page: Int) -> URLRequest {
         let url = URL(string: endpoint, relativeTo: baseURL)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
-        let urlRequest = URLRequest(url: (urlComponents?.url)!)
+        return URLRequest(url: (urlComponents?.url)!)
+    }
+    
+    func fetchStarships(page: Int, completion: @escaping (Result<PagedStarshipResponse, DataResponseError>) -> Void) {
+        let urlRequest = starWarsRequest(endpoint: Endpoints.starships, page: page)
         
         session.dataTask(with: urlRequest, completionHandler: { data, response, error in
           guard let httpResponse = response as? HTTPURLResponse,

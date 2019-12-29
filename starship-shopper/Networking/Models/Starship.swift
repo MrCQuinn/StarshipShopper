@@ -67,6 +67,14 @@ struct Starship: Decodable {
 //        passengerCapacity: passengerCapacity, cargoCapacity: cargoCapacity)
         self.init(name: name, cost: cost)
     }
+    
+    func formatCostString() -> String {
+        if let cost = self.cost {
+            return "₹"+String(cost)
+        }
+        
+        return "Cost Unknown"
+    }
 }
 
 /*

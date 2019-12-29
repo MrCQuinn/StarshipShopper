@@ -31,12 +31,7 @@ class StarshipTableViewCell: UITableViewCell {
     func configure(with starship: Starship?) {
         if let starship = starship {
             nameLabel?.text = starship.name
-            costLabel?.text = "Cost Unknown"
-            creditsIcon?.isHidden = true
-            if let cost = starship.cost {
-                costLabel?.text = String(cost)
-                creditsIcon?.isHidden = false
-            }
+            costLabel?.text = starship.formatCostString()
             
             indicatorView.stopAnimating()
         }else {
