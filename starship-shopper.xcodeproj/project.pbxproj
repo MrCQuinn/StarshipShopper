@@ -10,7 +10,6 @@
 		EC9B886623B8129200BA411A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B886523B8129200BA411A /* AppDelegate.swift */; };
 		EC9B886D23B8129200BA411A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9B886B23B8129200BA411A /* Main.storyboard */; };
 		EC9B886F23B8129400BA411A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC9B886E23B8129400BA411A /* Assets.xcassets */; };
-		EC9B887223B8129400BA411A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9B887023B8129400BA411A /* LaunchScreen.storyboard */; };
 		EC9B889D23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
 		EC9B889E23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
 		EC9B889F23B81AEC00BA411A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B889C23B81AEC00BA411A /* BaseViewController.swift */; };
@@ -62,7 +61,6 @@
 		EC9B886523B8129200BA411A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC9B886C23B8129200BA411A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC9B886E23B8129400BA411A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EC9B887123B8129400BA411A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC9B887323B8129400BA411A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC9B887823B8129400BA411A /* starship-shopperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "starship-shopperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9B888323B8129400BA411A /* starship-shopperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "starship-shopperUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +135,6 @@
 		EC9B889923B8141100BA411A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EC9B887023B8129400BA411A /* LaunchScreen.storyboard */,
 				EC9B886B23B8129200BA411A /* Main.storyboard */,
 			);
 			path = Views;
@@ -295,7 +292,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC9B887223B8129400BA411A /* LaunchScreen.storyboard in Resources */,
 				EC9B886F23B8129400BA411A /* Assets.xcassets in Resources */,
 				EC9B886D23B8129200BA411A /* Main.storyboard in Resources */,
 			);
@@ -389,14 +385,6 @@
 				EC9B886C23B8129200BA411A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EC9B887023B8129400BA411A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC9B887123B8129400BA411A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

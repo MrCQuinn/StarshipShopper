@@ -9,63 +9,98 @@
 import Foundation
 
 struct Starship: Decodable {
-    let name: String
-//    let model: String
-//    let manufacturer: String
-    let cost: Int?
-//    let length: Double
-//    let maxSpeed: Int
-//    let crewSize: Int
-//    let passengerCapacity: Int
-//    let cargoCapacity: Int
+    //     The name of this starship. The common name, such as "Death Star"
+            let name: String
+        //     The model or official name of this starship. Such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
+            let model: String
+    //    The class of this starship, such as "Starfighter" or "Deep Space Mobile Battlestation"
+            let starshipClass: String
+        //      The manufacturer of this starship. Comma separated if more than one.
+            let manufacturers: [String]
+        //     The cost of this starship new, in galactic credits.
+            let cost: Int?
+        //      The length of this starship in meters.
+            let length: Double?
+        //    The maximum speed of this starship in the atmosphere. "N/A" if this starship is incapable of atmospheric flight.
+            let maxAtmosphericSpeed: Int?
+        //    The class of this starships hyperdrive.
+            let hyperdriveRating: Double?
+        //    The Maximum number of Megalights this starship can travel in a standard hour. A "Megalight" is a standard unit of distance and has never been defined before within the Star Wars universe. This figure is only really useful for measuring the difference in speed of starships. We can assume it is similar to AU, the distance between our Sun (Sol) and Earth.
+            let maxMGLTPH: Int?
+        //  The number of personnel needed to run or pilot this starship.
+            let crewSize: Int?
+        //    The number of non-essential people this starship can transport.
+            let passengerCapacity: Int?
+        //    The maximum number of kilograms that this starship can transport.
+            let cargoCapacity: Int?
+        
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case model = "model"
+        case starshipClass = "starship_class"
         case manufacturer = "manufacturer"
         case cost = "cost_in_credits"
         case length = "length"
-        case maxSpeed = "max_atmosphering_speed"
         case crewSize = "crew"
         case passengerCapacity = "passengers"
+        case maxAtmosphericSpeed = "max_atmosphering_speed"
+        case hyperdriveRating = "hyperdrive_rating"
+        case MGLT = "MGLT"
         case cargoCapacity = "cargo_capacity"
     }
     
-    init(name: String, model: String, manufacturer: String, cost: Int, length: Double, maxSpeed: Int, crewSize: Int,
-         passengerCapacity: Int, cargoCapacity: Int) {
-         self.name = name
-//         self.model = model
-//         self.manufacturer = manufacturer
-         self.cost = cost
-//         self.length = length
-//         self.maxSpeed = maxSpeed
-//         self.crewSize = crewSize
-//         self.passengerCapacity = passengerCapacity
-//         self.cargoCapacity = cargoCapacity
-    }
-    
-    // for testing
-    init(name: String, cost: Int?)  {
+    init(name: String, model: String, starshipClass: String, manufacturers: [String], cost: Int?, length: Double?, crewSize: Int?, passengerCapacity: Int?, maxAtmosphericSpeed: Int?, hyperdriveRating: Double?, maxMGLTPH: Int?,
+         cargoCapacity: Int?) {
         self.name = name
+        self.model = model
+        self.starshipClass = starshipClass
+        self.manufacturers = manufacturers
         self.cost = cost
+        self.length = length
+        self.crewSize = crewSize
+        self.passengerCapacity = passengerCapacity
+        self.maxAtmosphericSpeed = maxAtmosphericSpeed
+        self.hyperdriveRating = hyperdriveRating
+        self.maxMGLTPH = maxMGLTPH
+        self.cargoCapacity = cargoCapacity
     }
     
     init(from decoder: Decoder) throws {
-        let container               = try decoder.container(keyedBy: CodingKeys.self)
-        let name                    = try container.decode(String.self, forKey: .name)
-//        let model                   = try container.decode(String.self, forKey: .model)
-//        let manufacturer            = try container.decode(String.self, forKey: .manufacturer)
+        let container                     = try decoder.container(keyedBy: CodingKeys.self)
+        let name                          = try container.decode(String.self, forKey: .name)
+        let model                         = try container.decode(String.self, forKey: .model)
+        let starshipClass                 = try container.decode(String.self, forKey: .starshipClass)
+        let manufacturerString            = try container.decode(String.self, forKey: .manufacturer)
         let costString                    = try container.decode(String.self, forKey: .cost)
+        let lengthString                  = try container.decode(String.self, forKey: .length)
+        let crewSizeString                = try container.decode(String.self, forKey: .crewSize)
+        let passengerCapacityString       = try container.decode(String.self, forKey: .passengerCapacity)
+        let maxAtmosphericSpeedString     = try container.decode(String.self, forKey: .maxAtmosphericSpeed)
+        let hyperdriveRatingString        = try container.decode(String.self, forKey: .hyperdriveRating)
+        let cargoCapacityString           = try container.decode(String.self, forKey: .cargoCapacity)
+        let MGLTString                    = try container.decode(String.self, forKey: .MGLT)
         
+        let manufacturers = manufacturerString.components(separatedBy: ", ")
         let cost = Int(costString)
-//        let length                  = try container.decode(Double.self, forKey: .length)
-//        let maxSpeed                = try container.decode(Int.self, forKey: .maxSpeed)
-//        let crewSize                = try container.decode(Int.self, forKey: .crewSize)
-//        let passengerCapacity       = try container.decode(Int.self, forKey: .passengerCapacity)
-//        let cargoCapacity           = try container.decode(Int.self, forKey: .cargoCapacity)
-//        self.init(name: name, model: model, manufacturer: manufacturer, cost: cost, length: length, maxSpeed: maxSpeed, crewSize: crewSize,
-//        passengerCapacity: passengerCapacity, cargoCapacity: cargoCapacity)
-        self.init(name: name, cost: cost)
+        let length = Double(lengthString)
+        let crewSize = Int(crewSizeString)
+        let passengersCapacity = Int(passengerCapacityString)
+        let maxAtmosphericSpeed = Int(maxAtmosphericSpeedString)
+        let hyperdriveRating = Double(hyperdriveRatingString)
+        let cargoCapacity = Int(cargoCapacityString)
+        
+        var maxMGLTPH: Int?
+        for item in MGLTString.components(separatedBy: CharacterSet.decimalDigits.inverted) {
+           if let number = Int(item) {
+               maxMGLTPH = number
+               break
+           }
+        }
+        
+        self.init(name: name, model: model, starshipClass: starshipClass, manufacturers: manufacturers, cost: cost, length: length,
+        crewSize: crewSize, passengerCapacity: passengersCapacity,
+        maxAtmosphericSpeed: maxAtmosphericSpeed, hyperdriveRating: hyperdriveRating, maxMGLTPH: maxMGLTPH, cargoCapacity: cargoCapacity)
     }
     
     func formatCostString() -> String {
@@ -74,6 +109,55 @@ struct Starship: Decodable {
         }
         
         return "Cost Unknown"
+    }
+    
+    func formatLengthString() -> String {
+        guard let length = self.length else {
+            return "Length Unknown"
+        }
+        return String(length)+"m"
+    }
+    
+    func formatMaxAtmosphericSpeedLabel() -> String {
+        guard let speed = self.maxAtmosphericSpeed else {
+            return "N/A"
+        }
+        return String(speed)+" MPH"
+    }
+    
+    func formatHyperdriveRating() -> String {
+        guard let rating = self.hyperdriveRating else {
+            return "Unavailable"
+        }
+        return String(rating)
+    }
+    
+    func formatMGL() -> String {
+        guard let mgl = self.maxMGLTPH else {
+            return "Unknown"
+        }
+        return String(mgl)+" MGLT"
+    }
+    
+    func formatCrewSize() -> String {
+        guard let size = self.crewSize else {
+            return "Unknown"
+        }
+        return String(size)
+    }
+    
+    func formatPassengerCapacity() -> String {
+        guard let capacity = self.passengerCapacity else {
+           return "Unknown"
+       }
+        return String(capacity)
+    }
+    
+    func formatCargoCapacity() -> String {
+        guard let capacity = self.cargoCapacity else {
+            return "Unknown"
+        }
+        return String(capacity)
     }
     
     enum Sortables {

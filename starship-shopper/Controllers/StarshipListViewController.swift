@@ -158,6 +158,13 @@ private extension StarshipListViewController {
     }
     
     func onSort(sortOn: String) {
+        // if data is not fetched wait for completion
+        if !viewModel.isFetched() {
+            viewModel.fetch(all: true)
+            sortOnFetched = currentSort
+            return
+        }
+        
         // if the rows are already sorted by this attribute reverse order
         if let cur = currentSort {
             if (cur == sortOn) {
@@ -168,13 +175,6 @@ private extension StarshipListViewController {
         }
         // set currently sorted attribute
         currentSort = sortOn
-        
-        // if data is not fetched wait for completion
-        if !viewModel.isFetched() {
-            viewModel.fetch(all: true)
-            sortOnFetched = currentSort
-            return
-        }
         
         viewModel.sortOn(sortOn: sortOn, desc: desc)
         tableView.reloadData()
