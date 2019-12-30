@@ -16,7 +16,7 @@ class StarshipDetailsViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
-    @IBOutlet weak var manufacturersLabel: NSLayoutConstraint!
+    @IBOutlet weak var manufacturersLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
     @IBOutlet weak var maxAtmosphericSpeedLabel: UILabel!
     @IBOutlet weak var hyperdriveRatingLabel: UILabel!
@@ -33,7 +33,7 @@ class StarshipDetailsViewController: UIViewController {
             priceLabel.text? = starship.formatCostString()
             modelLabel.text? = starship.model
             classLabel.text? = starship.starshipClass
-//            manufacturersLabel.text? = starship.manufacturersstarship.manufacturers.joined(separator: ", ")
+            manufacturersLabel.text? = starship.manufacturers.joined(separator: ", ")
             lengthLabel.text? = starship.formatLengthString()
             maxAtmosphericSpeedLabel.text? = starship.formatMaxAtmosphericSpeedLabel()
             hyperdriveRatingLabel.text? = starship.formatHyperdriveRating()

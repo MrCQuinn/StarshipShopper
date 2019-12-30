@@ -370,7 +370,7 @@
                         <outlet property="crewSizeLabel" destination="VUO-kP-Avh" id="Xws-0J-FNG"/>
                         <outlet property="hyperdriveRatingLabel" destination="Nxk-VI-JaU" id="RKE-nQ-V1A"/>
                         <outlet property="lengthLabel" destination="ecw-xz-Wea" id="4Iy-yw-oIK"/>
-                        <outlet property="manufacturersLabel" destination="wGr-uV-xDO" id="K7P-k9-nEz"/>
+                        <outlet property="manufacturersLabel" destination="MRG-Ll-YAu" id="iW9-dx-IpX"/>
                         <outlet property="maxAtmosphericSpeedLabel" destination="RjN-XL-Xzq" id="20u-hw-TnO"/>
                         <outlet property="mgltphLabel" destination="OYQ-aK-pna" id="A04-mr-N2S"/>
                         <outlet property="modelLabel" destination="cFI-V3-36I" id="wEZ-qY-gYK"/>
