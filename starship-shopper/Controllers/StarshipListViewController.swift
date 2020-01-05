@@ -98,7 +98,6 @@ extension StarshipListViewController: StarshipViewModelDelegate {
             guard let sortOn = self.sortOnFetched else {
                 return
             }
-            print("starships fetched, sorting on "+sortOn)
             onSort(sortOn: sortOn)
             sortOnFetched = nil
         }
@@ -152,16 +151,14 @@ private extension StarshipListViewController {
             print("User clicked cancel button")
         }))
 
-        self.present(alert, animated: true, completion: {
-            print("completion block")
-        })
+        self.present(alert, animated: true, completion: nil)
     }
     
     func onSort(sortOn: String) {
         // if data is not fetched wait for completion
         if !viewModel.isFetched() {
-            viewModel.fetch(all: true)
-            sortOnFetched = currentSort
+            sortOnFetched = sortOn
+            viewModel.fetchUntilCompletion()
             return
         }
         

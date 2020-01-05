@@ -20,6 +20,7 @@ final class StarshipViewModel {
     private var currentPage  = 1
     private var total = 0
     private var isFetchInProgress = false
+    private var fetchAll = false
     
     let client = StarWarsClient()
     
@@ -43,11 +44,12 @@ final class StarshipViewModel {
         return starships.count >= total
     }
     
-    func fetchStarships() {
-        fetch(all: false)
+    func fetchUntilCompletion() {
+        self.fetchAll = true
+        self.fetchStarships()
     }
     
-    func fetch(all: Bool) {
+    func fetchStarships() {
       guard !isFetchInProgress else {
         return
       }
@@ -75,8 +77,8 @@ final class StarshipViewModel {
               self.delegate?.onFetchCompleted(with: .none)
             }
             
-            if all && !self.isFetched() {
-                self.fetch(all: true)
+            if self.fetchAll && !self.isFetched() {
+                self.fetchStarships()
             }
           }
         }

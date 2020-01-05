@@ -41,9 +41,9 @@ final class StarWarsClient {
               completion(Result.failure(DataResponseError.network))
               return
           }
-            let toPrint = String(data: data, encoding: .utf8)!
-            
-            print(toPrint)
+//            let toPrint = String(data: data, encoding: .utf8)!
+//            
+//            print(toPrint)
           
           guard let decodedResponse = try? JSONDecoder().decode(PagedStarshipResponse.self, from: data) else {
             completion(Result.failure(DataResponseError.decoding))
