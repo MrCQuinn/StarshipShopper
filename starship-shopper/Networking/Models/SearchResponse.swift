@@ -11,18 +11,27 @@ import Foundation
 class SearchResponse {
     var total: Int
     var searchResults: [SearchResult]
+    var next: String?
     
+    init(total: Int, next: String?) {
+        self.total = total
+        self.next = next
+        self.searchResults = [SearchResult]()
+    }
+}
+
+class StarshipSearchResponse: SearchResponse {
     init(starshipResponse: StarshipResponse) {
-        self.total = starshipResponse.count
-        searchResults = [SearchResult]()
+        super.init(total: starshipResponse.count, next: starshipResponse.next)
         for starship in starshipResponse.starships {
-            searchResults.append(starship)
+            self.searchResults.append(starship)
         }
     }
-    
-    init(planetResponse: PlanetResponse) {
-        self.total = planetResponse.count
-        searchResults = [SearchResult]()
+}
+
+class PlanetSearchResponse: SearchResponse {
+    init(planetResponse: PlanetResponse, next: String? ) {
+        super.init(total: planetResponse.count, next: planetResponse.next)
         for planet in planetResponse.results {
             searchResults.append(planet)
         }

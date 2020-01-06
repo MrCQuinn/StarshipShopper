@@ -65,7 +65,6 @@ final class SearchResultViewModel {
                 }
                 
                 DispatchQueue.main.async {
-                    self.currentPage += 1
                     self.isFetchInProgress = false
                         
                     // if we have all the results from one endpoint move on to the next
@@ -89,6 +88,17 @@ final class SearchResultViewModel {
                     } else {
                          self.delegate?.onFetchCompleted(with: .none)
                     }
+                    
+                    guard let nextUrl = response.next else {
+                        self.currentEndpoint += 1
+                        if self.currentEndpoint >= self.endpoints.count {
+                            return
+                        }
+                        self.fetchSearchResults(query: query)
+                        return
+                    }
+                    
+                    self.fetchNex(query: query)
                  }
             }
         }
