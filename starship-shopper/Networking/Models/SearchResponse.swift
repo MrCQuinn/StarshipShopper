@@ -30,7 +30,7 @@ class StarshipSearchResponse: SearchResponse {
 }
 
 class PlanetSearchResponse: SearchResponse {
-    init(planetResponse: PlanetResponse, next: String? ) {
+    init(planetResponse: PlanetResponse) {
         super.init(total: planetResponse.count, next: planetResponse.next)
         for planet in planetResponse.results {
             searchResults.append(planet)

@@ -50,6 +50,8 @@ final class StarshipViewModel {
       }
       
       isFetchInProgress = true
+        
+        
       
         client.fetchStarships(page: currentPage) { result in
         switch result {

@@ -32,7 +32,6 @@ class SearchViewController: UIViewController {
         
         tableView.isHidden = true
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
         tableView.delegate = self
         
         indicatorView.hidesWhenStopped = true
@@ -61,12 +60,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.searchResult, for: indexPath) as! SearchResultTableViewCell
-        
-        if isLoadingCell(for: indexPath) {
-            cell.configure(with: .none)
-        }else {
-            cell.configure(with: viewModel.searchResult(at: indexPath.row))
-        }
+        cell.configure(with: viewModel.searchResult(at: indexPath.row))
         return cell
     }
        
@@ -78,27 +72,11 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-extension SearchViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            if let query = self.query {
-                viewModel.fetchSearchResults(query: query)
-            }
-        }
-    }
-}
-
 extension SearchViewController: FetcherDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        guard let newIndexPathsToReload = newIndexPathsToReload else {
-            indicatorView.stopAnimating()
-            tableView.isHidden = false
-            tableView.reloadData()
-            return
-        }
-        
-        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        indicatorView.stopAnimating()
+        tableView.isHidden = false
+        tableView.reloadData()
     }
     
     func onFetchFailed(with reason: String) {
@@ -114,16 +92,6 @@ private extension SearchViewController {
     func onSearchStart() {
         indicatorView.startAnimating()
         tableView.isHidden = true
-    }
-    
-    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= viewModel.currentCount
-    }
-    
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
     }
 }
 
