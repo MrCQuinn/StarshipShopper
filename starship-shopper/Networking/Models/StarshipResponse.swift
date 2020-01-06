@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PagedStarshipResponse: Decodable {
+struct StarshipResponse: Decodable {
     let starships: [Starship]
     let count: Int
     let next: String?

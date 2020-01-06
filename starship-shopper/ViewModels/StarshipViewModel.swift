@@ -8,13 +8,8 @@
 
 import UIKit
 
-protocol StarshipViewModelDelegate: class {
-    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-    func onFetchFailed(with reason: String)
-}
-
 final class StarshipViewModel {
-    private weak var delegate: StarshipViewModelDelegate?
+    private weak var delegate: FetcherDelegate?
     
     private var starships: [Starship] = []
     private var currentPage  = 1
@@ -24,7 +19,7 @@ final class StarshipViewModel {
     
     let client = StarWarsClient()
     
-    init(delegate: StarshipViewModelDelegate) {
+    init(delegate: FetcherDelegate) {
         self.delegate = delegate
     }
     
@@ -63,13 +58,17 @@ final class StarshipViewModel {
             self.isFetchInProgress = false
             self.delegate?.onFetchFailed(with: error.reason)
           }
-        case .success(let response):
+        case .success(let resp):
+            guard let response = resp as? StarshipResponse else {
+                return
+            }
+            
           DispatchQueue.main.async {
             self.currentPage += 1
             self.isFetchInProgress = false
             self.total = response.count
             self.starships.append(contentsOf: response.starships)
- 
+
             if self.currentPage > 2 {
               let indexPathsToReload = self.calculateIndexPathsToReload(from: response.starships)
               self.delegate?.onFetchCompleted(with: indexPathsToReload)

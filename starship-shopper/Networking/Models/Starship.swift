@@ -165,6 +165,16 @@ struct Starship: Decodable {
     }
 }
 
+extension Starship: SearchResult {
+    func Title() -> String {
+        return self.name
+    }
+    
+    func Type() -> String {
+        return "Starship"
+    }
+}
+
 /*
  {
      "name": "Millennium Falcon",

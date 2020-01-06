@@ -13,44 +13,76 @@ final class StarWarsClient {
         return URL(string: "https://swapi.co/api/")!
     }()
     
-    private enum Endpoints {
-        static let starships = "starships"
-    }
-    
     let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func starWarsRequest(endpoint: String, page: Int) -> URLRequest {
-        let url = URL(string: endpoint, relativeTo: baseURL)!
+    func starWarsRequest(endpoint: Endpoint, page: Int, params: [URLQueryItem]?) -> URLRequest {
+        let url = URL(string: endpoint.rawValue, relativeTo: baseURL)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
+        if let params = params {
+            urlComponents?.queryItems?.append(contentsOf: params)
+        }
         return URLRequest(url: (urlComponents?.url)!)
     }
     
-    func fetchStarships(page: Int, completion: @escaping (Result<PagedStarshipResponse, DataResponseError>) -> Void) {
-        let urlRequest = starWarsRequest(endpoint: Endpoints.starships, page: page)
+    func fetch(request: URLRequest, completion: @escaping (Result<Any, DataResponseError>) -> Void, parser: @escaping (Data) -> Void) {
+        session.dataTask(with: request, completionHandler: { data, response, error in
+                  guard let httpResponse = response as? HTTPURLResponse,
+                     (200...299).contains(httpResponse.statusCode),
+                    let data = data
+                  else {
+                      completion(Result.failure(DataResponseError.network))
+                      return
+                  }
+        //            let toPrint = String(data: data, encoding: .utf8)!
+        //
+        //            print(toPrint)
+                  
+                  parser(data)
+                }).resume()
+    }
+    
+    func fetchStarships(page: Int, completion: @escaping (Result<Any, DataResponseError>) -> Void) {
+        let urlRequest = starWarsRequest(endpoint: Endpoint.starships, page: page, params: nil)
         
-        session.dataTask(with: urlRequest, completionHandler: { data, response, error in
-          guard let httpResponse = response as? HTTPURLResponse,
-             (200...299).contains(httpResponse.statusCode),
-            let data = data
-          else {
-              completion(Result.failure(DataResponseError.network))
+        self.fetch(request: urlRequest, completion: completion) { data in
+            guard let decodedResponse = try? JSONDecoder().decode(StarshipResponse.self, from: data) else {
+              completion(Result.failure(DataResponseError.decoding))
               return
-          }
-//            let toPrint = String(data: data, encoding: .utf8)!
-//            
-//            print(toPrint)
-          
-          guard let decodedResponse = try? JSONDecoder().decode(PagedStarshipResponse.self, from: data) else {
-            completion(Result.failure(DataResponseError.decoding))
-            return
-          }
-          
-          completion(Result.success(decodedResponse))
-        }).resume()
+            }
+            
+            completion(Result.success(decodedResponse))
+        }
+    }
+    
+    func fetchSearchResults(endpoint: Endpoint, query: String, page: Int,  completion: @escaping
+        (Result<Any, DataResponseError>) -> Void) {
+        
+        let urlRequest = starWarsRequest(endpoint: endpoint, page: page, params: [URLQueryItem(name: "search", value: query)])
+        
+        self.fetch(request: urlRequest, completion: completion) { data in
+            
+            switch endpoint {
+            case Endpoint.starships:
+                guard let decodedResponse = try? JSONDecoder().decode(StarshipResponse.self, from: data) else {
+                  completion(Result.failure(DataResponseError.decoding))
+                  return
+                }
+                let searchResults = SearchResponse(starshipResponse: decodedResponse)
+                completion(Result.success(searchResults))
+            case Endpoint.planets:
+                guard let decodedResponse = try? JSONDecoder().decode(PlanetResponse.self, from: data) else {
+                 completion(Result.failure(DataResponseError.decoding))
+                 return
+               }
+               let searchResults = SearchResponse(planetResponse: decodedResponse)
+               completion(Result.success(searchResults))
+            }
+            
+        }
     }
 }
