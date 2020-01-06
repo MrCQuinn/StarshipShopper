@@ -10,13 +10,22 @@ import UIKit
 
 class StarshipListViewController: UIViewController {
     private enum CellIdentifiers {
-      static let list = "StarshipList"
+        static let starship = "StarshipCell"
+    }
+    
+    private enum SegueIdentifiers {
+        static let starshipDetail = "StarshipDetailSegue"
     }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var viewModel: StarshipViewModel!
+    private var selectedIndexPath: IndexPath?
+    
+    private var currentSort: String?
+    private var sortOnFetched: String?
+    private var desc: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +36,19 @@ class StarshipListViewController: UIViewController {
         tableView.isHidden = true
         tableView.dataSource = self
         tableView.prefetchDataSource = self
+        tableView.delegate = self
         
-        viewModel = StarshipViewModel(endpoint: "starships", delegate: self)
+        viewModel = StarshipViewModel(delegate: self)
         viewModel.fetchStarships()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifiers.starshipDetail {
+            let secondVc = segue.destination as! StarshipDetailsViewController
+            let indexPath = sender as! IndexPath
+            
+            secondVc.starship = viewModel.starship(at: indexPath.row)
+        }
     }
 }
 
@@ -39,7 +58,7 @@ extension StarshipListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! StarshipTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.starship, for: indexPath) as! StarshipTableViewCell
         
         if isLoadingCell(for: indexPath) {
             cell.configure(with: .none)
@@ -58,6 +77,12 @@ extension StarshipListViewController: UITableViewDataSourcePrefetching {
     }
 }
 
+extension StarshipListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: SegueIdentifiers.starshipDetail, sender: indexPath)
+    }
+}
+
 extension StarshipListViewController: StarshipViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         guard let newIndexPathsToReload = newIndexPathsToReload else {
@@ -68,6 +93,14 @@ extension StarshipListViewController: StarshipViewModelDelegate {
         }
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
         tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        
+        if viewModel.isFetched() {
+            guard let sortOn = self.sortOnFetched else {
+                return
+            }
+            onSort(sortOn: sortOn)
+            sortOnFetched = nil
+        }
     }
     
     func onFetchFailed(with reason: String) {
@@ -103,5 +136,44 @@ private extension StarshipListViewController {
         alertController.addAction(action)
       }
       present(alertController, animated: true)
+    }
+}
+
+private extension StarshipListViewController {
+    @IBAction func sort(_ sender: Any) {
+        let alert = UIAlertController(title: "Sort", message: "Choose an attribute to sort on", preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: Starship.Sortables.cost, style: .default , handler:{ (UIAlertAction)in
+            self.onSort(sortOn: Starship.Sortables.cost)
+        }))
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            print("User clicked cancel button")
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func onSort(sortOn: String) {
+        // if data is not fetched wait for completion
+        if !viewModel.isFetched() {
+            sortOnFetched = sortOn
+            viewModel.fetchUntilCompletion()
+            return
+        }
+        
+        // if the rows are already sorted by this attribute reverse order
+        if let cur = currentSort {
+            if (cur == sortOn) {
+                desc = !desc
+            }else {
+                desc = true
+            }
+        }
+        // set currently sorted attribute
+        currentSort = sortOn
+        
+        viewModel.sortOn(sortOn: sortOn, desc: desc)
+        tableView.reloadData()
     }
 }

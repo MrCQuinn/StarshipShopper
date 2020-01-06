@@ -11,6 +11,9 @@ import UIKit
 class StarshipTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var costLabel: UILabel!
+    @IBOutlet weak var creditsIcon: UIImageView!
+    
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     override func prepareForReuse() {
@@ -28,10 +31,18 @@ class StarshipTableViewCell: UITableViewCell {
     func configure(with starship: Starship?) {
         if let starship = starship {
             nameLabel?.text = starship.name
+            costLabel?.text = starship.formatCostString()
+            
             indicatorView.stopAnimating()
         }else {
-            nameLabel?.text = ""
+            setBlank()
             indicatorView.startAnimating()
         }
+    }
+    
+    func setBlank() {
+        nameLabel?.text = ""
+        costLabel?.text = ""
+        creditsIcon?.isHidden = true
     }
 }

@@ -20,12 +20,11 @@ final class StarshipViewModel {
     private var currentPage  = 1
     private var total = 0
     private var isFetchInProgress = false
+    private var fetchAll = false
     
     let client = StarWarsClient()
-    let endpoint: String
     
-    init(endpoint: String, delegate: StarshipViewModelDelegate) {
-        self.endpoint = endpoint
+    init(delegate: StarshipViewModelDelegate) {
         self.delegate = delegate
     }
     
@@ -34,12 +33,21 @@ final class StarshipViewModel {
     }
     
     var currentCount: Int {
-       return starships.count
-     }
-     
-     func starship(at index: Int) -> Starship {
-       return starships[index]
-     }
+        return starships.count
+    }
+    
+    func starship(at index: Int) -> Starship {
+        return starships[index]
+    }
+    
+    func isFetched() -> Bool {
+        return starships.count >= total
+    }
+    
+    func fetchUntilCompletion() {
+        self.fetchAll = true
+        self.fetchStarships()
+    }
     
     func fetchStarships() {
       guard !isFetchInProgress else {
@@ -48,7 +56,7 @@ final class StarshipViewModel {
       
       isFetchInProgress = true
       
-        client.fetchStarships(endpoint: self.endpoint, page: currentPage) { result in
+        client.fetchStarships(page: currentPage) { result in
         switch result {
         case .failure(let error):
           DispatchQueue.main.async {
@@ -68,14 +76,53 @@ final class StarshipViewModel {
             } else {
               self.delegate?.onFetchCompleted(with: .none)
             }
+            
+            if self.fetchAll && !self.isFetched() {
+                self.fetchStarships()
+            }
           }
         }
       }
+    }
+    
+    func sortOn(sortOn: String, desc: Bool) {
+        switch sortOn {
+        case Starship.Sortables.cost:
+            if desc {
+                self.starships.sort(by: costSortDesc)
+                return
+            }
+            self.starships.sort(by: costSortAsc)
+        default:
+            print("Sortable "+" is not implemented")
+        }
+    }
+    
+    func costSortDesc(this:Starship, that:Starship) -> Bool {
+        guard let thisCost = this.cost else {
+            return false
+        }
+        guard let thatCost = that.cost else {
+            return true
+        }
+        
+        return thisCost > thatCost
+    }
+    
+    func costSortAsc(this:Starship, that:Starship) -> Bool {
+        guard let thisCost = this.cost else {
+           return false
+        }
+        guard let thatCost = that.cost else {
+           return true
+        }
+        
+        return thisCost < thatCost
     }
     
     private func calculateIndexPathsToReload(from newStarships: [Starship]) -> [IndexPath] {
        let startIndex = starships.count - newStarships.count
        let endIndex = startIndex + newStarships.count
        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-     }
+    }
 }
