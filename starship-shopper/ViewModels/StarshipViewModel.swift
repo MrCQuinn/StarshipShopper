@@ -69,10 +69,10 @@ final class StarshipViewModel {
             self.currentPage += 1
             self.isFetchInProgress = false
             self.total = response.count
-            self.starships.append(contentsOf: response.starships)
+            self.starships.append(contentsOf: response.results)
 
             if self.currentPage > 2 {
-              let indexPathsToReload = self.calculateIndexPathsToReload(from: response.starships)
+              let indexPathsToReload = self.calculateIndexPathsToReload(from: response.results)
               self.delegate?.onFetchCompleted(with: indexPathsToReload)
             } else {
               self.delegate?.onFetchCompleted(with: .none)

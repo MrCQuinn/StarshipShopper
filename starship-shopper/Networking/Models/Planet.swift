@@ -17,6 +17,7 @@ struct Planet: Decodable {
     let orbital_period: String
     let population: String
     let surface_water: String
+    let terrain: String
 }
 
 extension Planet: SearchResult {
@@ -27,4 +28,11 @@ extension Planet: SearchResult {
     func Type() -> String {
         return "Planet"
     }
+}
+
+struct PlanetResponse: Decodable {
+    let results: [Planet]
+    let count: Int
+    let next: String?
+    let previous: String?
 }

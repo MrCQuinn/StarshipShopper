@@ -175,6 +175,13 @@ extension Starship: SearchResult {
     }
 }
 
+struct StarshipResponse: Decodable {
+    let results: [Starship]
+    let count: Int
+    let next: String?
+    let previous: String?
+}
+
 /*
  {
      "name": "Millennium Falcon",

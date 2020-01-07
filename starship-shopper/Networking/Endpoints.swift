@@ -11,4 +11,5 @@ import Foundation
 enum Endpoint: String {
     case starships
     case planets
+    case vehicles
 }

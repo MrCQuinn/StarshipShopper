@@ -13,8 +13,10 @@ class SearchViewController: UIViewController {
         static let searchResult = "SearchResult"
     }
     
-    private enum SegueIdentifiers {
-        static let searchResultDetail = "SearchResultSegue"
+    private enum StoryboardIdentifiers {
+        static let starshipDetail = "StarshipDetail"
+        static let planetDetail = "PlanetDetail"
+        static let vehicleDetail = "VehicleDetail"
     }
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -36,7 +38,7 @@ class SearchViewController: UIViewController {
         
         indicatorView.hidesWhenStopped = true
         
-        viewModel = SearchResultViewModel(delegate: self, endpoints: [Endpoint.starships, Endpoint.planets])
+        viewModel = SearchResultViewModel(delegate: self, endpoints: [Endpoint.starships, Endpoint.planets, Endpoint.vehicles])
     }
 }
 
@@ -68,7 +70,31 @@ extension SearchViewController: UITableViewDataSource {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.searchResultDetail, sender: indexPath)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var vc: UIViewController?
+        switch viewModel.searchResult(at: indexPath.row) {
+        case let starship as Starship:
+            if let starshipViewController = storyBoard.instantiateViewController(withIdentifier: StoryboardIdentifiers.starshipDetail) as? StarshipDetailsViewController {
+                starshipViewController.starship = starship
+                vc = starshipViewController
+            }
+        case let planet as Planet:
+            if let planetViewController = storyBoard.instantiateViewController(withIdentifier: StoryboardIdentifiers.planetDetail) as? PlanetDetailViewController {
+                planetViewController.planet = planet
+                vc = planetViewController
+            }
+        case let vehicle as Vehicle:
+            if let vehicleViewController = storyBoard.instantiateViewController(withIdentifier: StoryboardIdentifiers.vehicleDetail) as? VehicleDetailViewController {
+                vehicleViewController.vehicle = vehicle
+                vc = vehicleViewController
+            }
+        default:
+            return
+        }
+        if let viewController = vc {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 }
 

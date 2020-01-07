@@ -68,6 +68,11 @@ final class StarWarsClient {
              return nil
            }
            return PlanetSearchResponse(planetResponse: decodedResponse)
+        case Endpoint.vehicles:
+            guard let decodedResponse = try? JSONDecoder().decode(VehicleResponse.self, from: data) else {
+                return nil
+            }
+            return VehicleSearchResponse(vehicleResponse: decodedResponse)
         }
     }
     
