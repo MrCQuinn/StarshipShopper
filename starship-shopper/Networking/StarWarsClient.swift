@@ -13,44 +13,104 @@ final class StarWarsClient {
         return URL(string: "https://swapi.co/api/")!
     }()
     
-    private enum Endpoints {
-        static let starships = "starships"
-    }
-    
     let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func starWarsRequest(endpoint: String, page: Int) -> URLRequest {
-        let url = URL(string: endpoint, relativeTo: baseURL)!
+    func starWarsRequest(endpoint: Endpoint, params: [URLQueryItem]?) -> URLRequest {
+        let url = URL(string: endpoint.rawValue, relativeTo: baseURL)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
+        urlComponents?.queryItems = params
         return URLRequest(url: (urlComponents?.url)!)
     }
     
-    func fetchStarships(page: Int, completion: @escaping (Result<PagedStarshipResponse, DataResponseError>) -> Void) {
-        let urlRequest = starWarsRequest(endpoint: Endpoints.starships, page: page)
+    func fetch(request: URLRequest, completion: @escaping (Result<Any, DataResponseError>) -> Void, parser: @escaping (Data) -> Void) {
+        session.dataTask(with: request, completionHandler: { data, response, error in
+                  guard let httpResponse = response as? HTTPURLResponse,
+                     (200...299).contains(httpResponse.statusCode),
+                    let data = data
+                  else {
+                      completion(Result.failure(DataResponseError.network))
+                      return
+                  }
+//                    let toPrint = String(data: data, encoding: .utf8)!
+//
+//                    print(toPrint)
+                  
+                  parser(data)
+                }).resume()
+    }
+    
+    func fetchStarships(page: Int, completion: @escaping (Result<Any, DataResponseError>) -> Void) {
+        let urlRequest = starWarsRequest(endpoint: Endpoint.starships, params: [URLQueryItem(name: "page", value: "\(page)")])
         
-        session.dataTask(with: urlRequest, completionHandler: { data, response, error in
-          guard let httpResponse = response as? HTTPURLResponse,
-             (200...299).contains(httpResponse.statusCode),
-            let data = data
-          else {
-              completion(Result.failure(DataResponseError.network))
+        self.fetch(request: urlRequest, completion: completion) { data in
+            guard let decodedResponse = try? JSONDecoder().decode(StarshipResponse.self, from: data) else {
+              completion(Result.failure(DataResponseError.decoding))
               return
-          }
-//            let toPrint = String(data: data, encoding: .utf8)!
-//            
-//            print(toPrint)
-          
-          guard let decodedResponse = try? JSONDecoder().decode(PagedStarshipResponse.self, from: data) else {
-            completion(Result.failure(DataResponseError.decoding))
-            return
-          }
-          
-          completion(Result.success(decodedResponse))
-        }).resume()
+            }
+            
+            completion(Result.success(decodedResponse))
+        }
+    }
+    
+    func parseSearchData(endpoint: Endpoint, data: Data) -> SearchResponse? {
+        switch endpoint {
+        case Endpoint.starships:
+            guard let decodedResponse = try? JSONDecoder().decode(StarshipResponse.self, from: data) else {
+              return nil
+            }
+            return StarshipSearchResponse(starshipResponse: decodedResponse)
+        case Endpoint.planets:
+            guard let decodedResponse = try? JSONDecoder().decode(PlanetResponse.self, from: data) else {
+             return nil
+           }
+           return PlanetSearchResponse(planetResponse: decodedResponse)
+        case Endpoint.vehicles:
+            guard let decodedResponse = try? JSONDecoder().decode(VehicleResponse.self, from: data) else {
+                return nil
+            }
+            return VehicleSearchResponse(vehicleResponse: decodedResponse)
+        }
+    }
+    
+    func fetchSearchResults(endpoints: [Endpoint], query: String, completion: @escaping (Result<Any, DataResponseError>) -> Void) {
+        var results = [SearchResult]()
+        var endpointsFetched = 0
+        for endpoint in endpoints {
+            // create request for endpoint
+            let urlRequest = starWarsRequest(endpoint: endpoint, params: [URLQueryItem(name: "search", value: query)])
+            // req all for endpoint
+            self.fetchResults(for: endpoint, request: urlRequest, allResults: results, completion: completion) { newResults in
+                // add to total results
+                results.append(contentsOf: newResults)
+                endpointsFetched += 1
+                if endpointsFetched >= endpoints.count {
+                    // run completion handler with results
+                    completion(Result.success(results))
+                }
+            }
+        }
+    }
+    
+    func fetchResults(for endpoint: Endpoint, request: URLRequest, allResults: [SearchResult], completion: @escaping (Result<Any, DataResponseError>) -> Void, onEndpointFetched: @escaping ([SearchResult]) -> Void) {
+        var results = allResults
+        self.fetch(request: request, completion: completion) { data in
+            
+            guard let response = self.parseSearchData(endpoint: endpoint, data: data) else {
+                completion(Result.failure(DataResponseError.decoding))
+                return
+            }
+            results.append(contentsOf: response.searchResults)
+            
+            guard let nextUrl = response.next else {
+                onEndpointFetched(results)
+                return
+            }
+            
+            return self.fetchResults(for: endpoint, request: URLRequest(url: URL(string: nextUrl)!), allResults: results, completion: completion, onEndpointFetched: onEndpointFetched)
+        }
     }
 }

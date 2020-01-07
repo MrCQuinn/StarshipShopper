@@ -12,7 +12,6 @@ class StarshipTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
-    @IBOutlet weak var creditsIcon: UIImageView!
     
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
@@ -43,6 +42,5 @@ class StarshipTableViewCell: UITableViewCell {
     func setBlank() {
         nameLabel?.text = ""
         costLabel?.text = ""
-        creditsIcon?.isHidden = true
     }
 }

@@ -83,7 +83,7 @@ extension StarshipListViewController: UITableViewDelegate {
     }
 }
 
-extension StarshipListViewController: StarshipViewModelDelegate {
+extension StarshipListViewController: FetcherDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         guard let newIndexPathsToReload = newIndexPathsToReload else {
             indicatorView.stopAnimating()
